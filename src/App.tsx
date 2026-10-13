@@ -3,6 +3,7 @@ import Categories from './components/Categories/Categories';
 import Header from './components/Header/Header';
 import HeroBanner from './components/HeroBanner/HeroBanner';
 import ProductShelf from './components/ProductShelf/ProductShelf';
+import ProductModal from './components/ProductModal/ProductModal';
 import { loadProducts } from './services/products';
 import type { Product } from './types/product';
 import './styles/catalog.scss';
@@ -12,6 +13,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -59,10 +61,17 @@ export default function App() {
           ) : products.length === 0 ? (
             <p className="product-catalog__message container" role="status">Nenhum produto disponível.</p>
           ) : (
-            <ProductShelf products={products} />
+            <ProductShelf products={products} onSelectProduct={setSelectedProduct} />
           )}
         </div>
       </main>
+      {selectedProduct && (
+        <ProductModal
+          key={selectedProduct.productName}
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
     </>
   );
 }

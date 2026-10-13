@@ -1,0 +1,229 @@
+@use '../../styles/variables' as v;
+
+@font-face {
+  font-family: 'Work Sans';
+  src: url('/fonts/WorkSans-Variable.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+.product-modal {
+  width: 769px;
+  max-width: calc(100% - 32px);
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: 6px;
+  color: #3f3f40;
+  background: #fff;
+
+  &::backdrop {
+    background: rgb(0 0 0 / 54%);
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 247px minmax(0, 328px);
+    gap: 87px;
+    min-height: 299.257px;
+    padding: 56.5px 51px 38px 56px;
+  }
+
+  &__close {
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 21px;
+      left: 14px;
+      width: 16px;
+      height: 1px;
+      background: #707070;
+      content: '';
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &__image {
+    width: 247px;
+    height: 192.2px;
+    object-fit: contain;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    min-width: 0;
+    padding-top: 6.5px;
+  }
+
+  &__summary {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  &__name,
+  &__price {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: 1px;
+    overflow-wrap: anywhere;
+  }
+
+  &__name {
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  &__price {
+    font-weight: 600;
+  }
+
+  &__description {
+    min-height: 31px;
+    margin: 0;
+    color: v.$text-muted;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.505;
+    letter-spacing: 0.5px;
+    overflow-wrap: anywhere;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__quantity {
+    display: grid;
+    flex: 0 0 110px;
+    grid-template-columns: 36px minmax(0, 1fr) 36px;
+    align-items: center;
+    min-height: 36px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+
+    button {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 34px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.35;
+        cursor: default;
+      }
+    }
+
+    output {
+      min-width: 0;
+      font-size: 16px;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  &__buy {
+    flex: 0 1 188px;
+    min-height: 36px;
+    padding: 7px 16px;
+    border: 0;
+    border-radius: 6px;
+    color: #271c47;
+    background: v.$brand-accent;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  &__confirmation {
+    margin: 0;
+    color: v.$brand-primary;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 800px) {
+  .product-modal {
+    &__layout {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+      gap: 24px;
+      padding: 48px 24px 32px;
+    }
+
+    &__image {
+      justify-self: center;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .product-modal {
+    &__layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+      padding: 48px 20px 24px;
+    }
+
+    &__content {
+      gap: 24px;
+      padding-top: 0;
+    }
+
+    &__name,
+    &__price {
+      line-height: 1.3;
+    }
+
+    &__description {
+      min-height: 0;
+      font-size: 12px;
+    }
+
+    &__quantity {
+      flex-basis: 128px;
+      grid-template-columns: 44px minmax(0, 1fr) 44px;
+      min-height: 46px;
+
+      button {
+        width: 44px;
+        height: 44px;
+      }
+    }
+
+    &__buy {
+      flex-grow: 1;
+      min-height: 44px;
+      padding-inline: 10px;
+    }
+  }
+}

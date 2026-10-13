@@ -4,9 +4,10 @@ import './ProductCard.scss';
 
 type ProductCardProps = {
   product: Product;
+  onSelectProduct: (product: Product) => void;
 };
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, onSelectProduct }: ProductCardProps) {
   return (
     <article className="product-card">
       <img
@@ -19,7 +20,15 @@ export default function ProductCard({ product }: ProductCardProps) {
       />
       <h3 className="product-card__name">{product.productName}</h3>
       <p className="product-card__price">{formatPrice(product.price)}</p>
-      <button className="product-card__button" type="button" disabled>Comprar</button>
+      <button
+        className="product-card__button"
+        type="button"
+        aria-label={`Comprar ${product.productName}`}
+        aria-haspopup="dialog"
+        onClick={() => onSelectProduct(product)}
+      >
+        Comprar
+      </button>
     </article>
   );
 }

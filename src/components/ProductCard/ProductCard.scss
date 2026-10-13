@@ -1,6 +1,7 @@
 @use '../../styles/variables' as v;
 
 .product-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 500px;
@@ -46,5 +47,22 @@
     font-weight: 700;
     line-height: 24px;
     text-transform: uppercase;
+    cursor: pointer;
+
+    &::after {
+      position: absolute;
+      inset: 0;
+      border-radius: 10px;
+      content: '';
+    }
+
+    &:focus-visible {
+      outline: none;
+
+      &::after {
+        outline: 3px solid v.$brand-primary;
+        outline-offset: 4px;
+      }
+    }
   }
 }

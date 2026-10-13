@@ -6,6 +6,7 @@ import './ProductShelf.scss';
 
 type ProductShelfProps = {
   products: Product[];
+  onSelectProduct: (product: Product) => void;
   id?: string;
 };
 
@@ -22,7 +23,7 @@ function getScrollBehavior(): ScrollBehavior {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
 }
 
-export default function ProductShelf({ products, id }: ProductShelfProps) {
+export default function ProductShelf({ products, onSelectProduct, id }: ProductShelfProps) {
   const titleId = useId();
   const listId = useId();
   const instructionsId = useId();
@@ -101,7 +102,7 @@ export default function ProductShelf({ products, id }: ProductShelfProps) {
         >
           {products.map((product) => (
             <li className="product-shelf__item" key={product.productName}>
-              <ProductCard product={product} />
+              <ProductCard product={product} onSelectProduct={onSelectProduct} />
             </li>
           ))}
         </ul>
