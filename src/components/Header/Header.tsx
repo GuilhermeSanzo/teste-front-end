@@ -9,7 +9,7 @@ const shortcuts = [
 
 export default function Header() {
   return (
-    <header className="site-header container">
+    <header className="site-header container" id="inicio">
       <ul className="site-header__benefits" aria-label="Vantagens da loja">
         <li>
           <img src="/images/icons/shield-check.svg" alt="" width="20" height="20" />

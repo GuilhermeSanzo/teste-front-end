@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import Categories from './components/Categories/Categories';
+import BrandShelf from './components/BrandShelf/BrandShelf';
+import CatalogSection from './components/CatalogSection/CatalogSection';
+import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import HeroBanner from './components/HeroBanner/HeroBanner';
-import ProductShelf from './components/ProductShelf/ProductShelf';
+import Newsletter from './components/Newsletter/Newsletter';
+import PartnerBanners from './components/PartnerBanners/PartnerBanners';
 import ProductModal from './components/ProductModal/ProductModal';
 import { loadProducts } from './services/products';
 import type { Product } from './types/product';
-import './styles/catalog.scss';
 
 export default function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -37,6 +40,14 @@ export default function App() {
     return () => controller.abort();
   }, [attempt]);
 
+  const catalogProps = {
+    products,
+    isLoading,
+    error,
+    onRetry: () => setAttempt((current) => current + 1),
+    onSelectProduct: setSelectedProduct,
+  };
+
   return (
     <>
       <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
@@ -44,27 +55,15 @@ export default function App() {
       <main id="conteudo" tabIndex={-1}>
         <HeroBanner />
         <Categories />
-        <div className="product-catalog" id="produtos" aria-busy={isLoading}>
-          {isLoading ? (
-            <p className="product-catalog__message container" role="status">Carregando produtos…</p>
-          ) : error ? (
-            <div className="product-catalog__message container" role="alert">
-              <p>{error}</p>
-              <button
-                className="product-catalog__retry"
-                type="button"
-                onClick={() => setAttempt((current) => current + 1)}
-              >
-                Tentar novamente
-              </button>
-            </div>
-          ) : products.length === 0 ? (
-            <p className="product-catalog__message container" role="status">Nenhum produto disponível.</p>
-          ) : (
-            <ProductShelf products={products} onSelectProduct={setSelectedProduct} />
-          )}
-        </div>
+        <CatalogSection id="produtos" announceStatus {...catalogProps} />
+        <PartnerBanners destination="#produtos-destaque" />
+        <CatalogSection id="produtos-destaque" variant="view-all" {...catalogProps} />
+        <PartnerBanners destination="#produtos-marcas" />
+        <BrandShelf destination="#produtos-marcas" />
+        <CatalogSection id="produtos-marcas" variant="view-all" {...catalogProps} />
+        <Newsletter />
       </main>
+      <Footer />
       {selectedProduct && (
         <ProductModal
           key={selectedProduct.productName}
