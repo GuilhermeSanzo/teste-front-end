@@ -8,8 +8,11 @@
     "npm": ">=10.0.0"
   },
   "scripts": {
+    "sync:products": "node scripts/sync-products.mjs",
+    "predev": "npm run sync:products",
     "dev": "vite",
     "typecheck": "tsc -b",
+    "prebuild": "npm run sync:products",
     "build": "npm run typecheck && vite build",
     "preview": "vite preview"
   },
