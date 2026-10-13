@@ -1,0 +1,50 @@
+@use '../../styles/variables' as v;
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  padding: 24px 12px 16px;
+  border-radius: 10px;
+  color: #3f3f40;
+  background: #fff;
+  box-shadow: 0 3px 19px rgb(0 0 0 / 22%);
+
+  &__image {
+    align-self: center;
+    width: 100%;
+    max-width: 278px;
+    height: 228px;
+    object-fit: contain;
+  }
+
+  &__name {
+    min-height: 45px;
+    margin: 16px 0 0;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  &__price {
+    margin: 40px 0 16px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+  }
+
+  &__button {
+    min-height: 44px;
+    margin-top: auto;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    background: v.$brand-primary;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+    text-transform: uppercase;
+  }
+}

@@ -6,7 +6,7 @@ export default function HeroBanner() {
       <div className="hero-banner__content container">
         <h1 id="hero-title">Venha conhecer nossas<br />promoções</h1>
         <p><strong>50% Off</strong> nos produtos</p>
-        <button className="hero-banner__button" type="button" disabled>Ver produto</button>
+        <a className="hero-banner__button" href="#produtos">Ver produto</a>
       </div>
     </section>
   );
