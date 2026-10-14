@@ -49,6 +49,7 @@
     text-transform: uppercase;
     cursor: pointer;
 
+    // Estende a área do botão ao card inteiro, mantendo um único controle de teclado.
     &::after {
       position: absolute;
       inset: 0;

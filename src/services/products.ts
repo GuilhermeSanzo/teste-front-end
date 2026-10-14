@@ -19,6 +19,7 @@ export async function loadProducts(signal: AbortSignal): Promise<Product[]> {
 
   if (!response.ok) throw new Error('Não foi possível carregar os produtos.');
 
+  // Mantém a resposta como unknown até confirmar a estrutura e os campos do catálogo.
   const data: unknown = await response.json();
 
   if (data === null || typeof data !== 'object'

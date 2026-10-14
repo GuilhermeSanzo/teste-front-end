@@ -26,6 +26,7 @@ export default function App() {
     async function fetchProducts() {
       try {
         const loadedProducts = await loadProducts(controller.signal);
+        // Ignora respostas de uma consulta cancelada ao sair da página ou tentar novamente.
         if (!controller.signal.aborted) setProducts(loadedProducts);
       } catch {
         if (!controller.signal.aborted) {

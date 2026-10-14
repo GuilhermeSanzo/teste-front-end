@@ -51,6 +51,7 @@ export default function ProductShelf({ products, onSelectProduct, id, variant = 
     const firstCard = list?.firstElementChild;
     if (!list || !firstCard) return;
 
+    // Calcula o passo com as medidas atuais para acompanhar o layout responsivo.
     const gap = Number.parseFloat(getComputedStyle(list).columnGap);
     const distance = firstCard.getBoundingClientRect().width + gap;
     list.scrollBy({ left: distance * direction, behavior: getScrollBehavior() });

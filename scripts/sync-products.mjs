@@ -35,6 +35,7 @@ try {
   }
 
   await mkdir(directory, { recursive: true });
+  // Substitui o catálogo apenas depois de gravar toda a resposta no arquivo temporário.
   await writeFile(temporaryFile, content, 'utf8');
   await rename(temporaryFile, destination);
   console.log(`Catálogo oficial sincronizado: ${data.products.length} produtos.`);

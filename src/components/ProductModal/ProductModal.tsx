@@ -12,6 +12,7 @@ type ProductModalProps = {
 function isOutsideDialog(event: MouseEvent<HTMLDialogElement> | PointerEvent<HTMLDialogElement>) {
   if (event.target !== event.currentTarget) return false;
 
+  // O fundo e o espaço interno podem ter o dialog como alvo; as coordenadas distinguem os dois.
   const bounds = event.currentTarget.getBoundingClientRect();
   return event.clientX < bounds.left || event.clientX > bounds.right
     || event.clientY < bounds.top || event.clientY > bounds.bottom;
@@ -82,6 +83,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
       onKeyDown={keepFocusInDialog}
       onPointerDown={(event) => { startedOutside.current = isOutsideDialog(event); }}
       onClick={(event) => {
+        // Fecha apenas se o gesto começou e terminou no fundo, evitando fechar ao arrastar de dentro.
         if (startedOutside.current && isOutsideDialog(event)) closeModal();
         startedOutside.current = false;
       }}
